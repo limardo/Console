@@ -1,0 +1,11 @@
+@import "config";
+
+/*!
+Theme Name: #{map-get($metadata, theme-name)}
+Theme URI: #{map-get($metadata, theme-uri)}
+Author: #{map-get($metadata, theme-author)}
+Author URI: #{map-get($metadata, theme-author-uri)}
+Description: #{map-get($metadata, theme-description)}
+Version: #{map-get($metadata, theme-version)}
+License: #{map-get($metadata, theme-license)}
+ */
