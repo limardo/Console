@@ -1,33 +1,30 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var config = require('../config');
-var Notification = require('../notification');
-
-$.browserify = require('browserify');
-$.source = require('vinyl-source-stream');
-$.buffer = require('vinyl-buffer');
-
-/*
- gulp.task('browserify', function () {
- var stream = $.browserify(config.directories.src + '/js/index.js', {});
- stream.transform(require('babelify'), {presets: ['es2015', 'react']});
-
- return stream
- .bundle()
- .on('error', function (e) {
- new Notification().error('Browserify Failed!', e);
- })
- .pipe($.source(config.name + '.js'))
- .pipe($.buffer())
- .pipe($.sourcemaps.init({loadMaps: true}))
- .pipe($.uglify())
- .pipe($.sourcemaps.write('.'))
- .pipe(gulp.dest(config.directories.dist + '/js/'))
- .pipe(new Notification('Browserify Compiled'));
- });
- */
+var _ = require('lodash');
 
 gulp.task('watch', function () {
+
     config.watch = true;
+
+    var tasks = [
+        {name: 'sass', watcher: [config.directories.src + '/sass/**/*.+(sass|scss)']},
+        {name: 'images', watcher: [config.directories.src + '/images/**/*.+(jpg|jpeg|png|gif|svg)']},
+        {name: 'theme', watcher: [config.directories.src + '/**/*.php']}
+    ];
+
+    var batchOptions = {
+        limit: undefined,
+        timeout: 1000
+    };
+
     gulp.start('browserify');
+
+    gulp.start('browsersync');
+
+    _.forEach(tasks, function (task) {
+        $.watch(task.watcher, $.batch(batchOptions, function (events) {
+            events.on('end', gulp.start(task.name));
+        }));
+    });
 });

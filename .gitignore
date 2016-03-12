@@ -15,4 +15,12 @@ node_modules
 # oSX Junk files
 .DS_Store
 
+# Jetbrains
 .idea/
+
+# Dist
+dist/
+wordpress/
+
+# Normalize
+_normalize.scss

@@ -1,5 +1,7 @@
 @import "config";
 
+@import "normalize";
+
 /*!
 Theme Name: #{map-get($metadata, theme-name)}
 Theme URI: #{map-get($metadata, theme-uri)}

@@ -4,7 +4,7 @@ var config = require('../config');
 var Notification = require('../notification');
 
 gulp.task('images', function () {
-    return gulp.src(config.directories.src + '/images/**/*.{jpg|jpeg|png|gif|svg}')
+    return gulp.src(config.directories.src + '/images/**/*.+(jpg|jpeg|png|gif|svg)')
         .pipe($.changed(config.directories.dist + '/images/'))
         .pipe($.imagemin({
             optimizationLevel: 7,
