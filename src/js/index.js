@@ -7,4 +7,4 @@ ReactDOM.render((
     <Route path="/">
     </Route>
   </Router>
-),document.body);
+),document.app);
