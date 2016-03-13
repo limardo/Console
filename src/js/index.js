@@ -8,11 +8,4 @@ ReactDOM.render((
         <Route path="/" component={Main}>
         </Route>
     </Router>
-), document.body);
-
-console.info('ok');
-console.info('ok');
-console.info('ok');
-console.info('ok');
-console.info('ok');
-console.info('ok');
+), document.getElementById('app'));

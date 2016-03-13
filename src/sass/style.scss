@@ -1,6 +1,6 @@
 @import "config";
-
 @import "normalize";
+@import "../../node_modules/font-awesome/scss/font-awesome";
 
 /*!
 Theme Name: #{map-get($metadata, theme-name)}
@@ -11,3 +11,32 @@ Description: #{map-get($metadata, theme-description)}
 Version: #{map-get($metadata, theme-version)}
 License: #{map-get($metadata, theme-license)}
  */
+
+body {
+  color: $foreground;
+  background-color: $background;
+  padding: 4px 8px;
+}
+
+.fa-tilde {
+  font-size: 22px;
+  margin: 0 10px;
+  vertical-align: bottom;
+  &:before {
+    content: "~";
+  }
+}
+
+.row-output{
+  display: block;
+}
+
+.command{
+  .cursor{
+    background-color: $foreground;
+    width: 8px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+}

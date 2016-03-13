@@ -1,10 +1,14 @@
 // Metadata; use metadata() to access
 $metadata: (
-  theme-name: "Console", 
-  theme-uri: "", 
-  theme-author: "Luca Limardo", 
-  theme-author-uri: "www.lucalimardo.com", 
-  theme-description: "A theme that emulates the terminal", 
-  theme-version: "0.0.1", 
-  theme-license: "GPL-3.0"
+        theme-name: "Console",
+        theme-uri: "",
+        theme-author: "Luca Limardo",
+        theme-author-uri: "www.lucalimardo.com",
+        theme-description: "A theme that emulates the terminal",
+        theme-version: "0.0.1",
+        theme-license: "GPL-3.0"
 );
+
+$fa-font-path: "./fonts" !default;
+$foreground: rgb(173, 173, 173);
+$background: rgb(32, 32, 32);
