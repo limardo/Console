@@ -16,8 +16,7 @@ class Main extends React.Component {
         var scope = this;
         scope.wp.pages()
             .then(function (data) {
-              scope.setState({banner:data[0].content.rendered});
-              scope.setProps({data});
+              scope.setState({data});
             })
             .catch(function (err) {
                 alert(err);
@@ -28,10 +27,9 @@ class Main extends React.Component {
     }
 
     render() {
-        var props = this.props;
         return (
             <div>
-                <Header {...props} />
+                <Header {...this.state} />
                 <Row />
             </div>
         );
