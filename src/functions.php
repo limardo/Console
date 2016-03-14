@@ -14,6 +14,8 @@ if (!function_exists('console_setup')):
             'gallery',
             'caption',
         ));
+
+        remove_filter( 'the_content', 'wpautop' );
     }
 endif;
 add_action('after_setup_theme', 'console_setup');

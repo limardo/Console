@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import WP from 'wordpress-rest-api'
 import Header from './header';
 import Row from './row';
@@ -7,16 +8,16 @@ class Main extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {content: ''};
+        this.state = {};
         this.wp = new WP({endpoint: WP_API_Settings.root});
     }
 
     componentDidMount() {
         var scope = this;
         scope.wp.pages()
-            .path('/pagina-di-esempio')
             .then(function (data) {
-                console.info(data)
+              scope.setState({banner:data[0].content.rendered});
+              scope.setProps({data});
             })
             .catch(function (err) {
                 alert(err);
@@ -27,9 +28,10 @@ class Main extends React.Component {
     }
 
     render() {
+        var props = this.props;
         return (
             <div>
-                <Header />
+                <Header {...props} />
                 <Row />
             </div>
         );

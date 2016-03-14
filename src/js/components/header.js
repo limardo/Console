@@ -9,10 +9,7 @@ class Header extends React.Component {
     render() {
         return (
             <header>
-                <span className="row-output">__                   __   _                   __</span>
-                <span className="row-output">/ /  __ _________ _  / /  (_)_ _  ___ ________/ /__</span>
-                <span className="row-output">/ /__/ // / __/ _ `/ / /__/ /  ' \/ _ `/ __/ _  / _ \</span>
-                <span className="row-output">/____/\_,_/\__/\_,_/ /____/_/_/_/_/\_,_/_/  \_,_/\___/</span>
+             <p>&nbsp;&nbsp; __&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; __&nbsp;&nbsp; _&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; __&nbsp; &nbsp;<br />&nbsp; / /&nbsp; __ _________ _&nbsp; / /&nbsp; (_)_ _&nbsp; ___ ________/ /__ <br />&nbsp;/ /__/ // / __/ _ `/ / /__/ /&nbsp; ' \/ _ `/ __/ _&nbsp; / _ \<br />/____/\_,_/\__/\_,_/ /____/_/_/_/_/\_,_/_/&nbsp; \_,_/\___/</p>     
             </header>
         );
     }

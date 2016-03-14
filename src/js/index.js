@@ -5,7 +5,7 @@ import Main from './components/main';
 
 ReactDOM.render((
     <Router history={browserHistory}>
-        <Route path="/" component={Main}>
+        <Route path="/wordpress/" component={Main}>
         </Route>
     </Router>
 ), document.getElementById('app'));

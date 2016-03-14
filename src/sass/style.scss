@@ -13,6 +13,7 @@ License: #{map-get($metadata, theme-license)}
  */
 
 body {
+  font-family:monospace;
   color: $foreground;
   background-color: $background;
   padding: 4px 8px;

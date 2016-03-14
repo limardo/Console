@@ -1,11 +1,11 @@
 module.exports = {
     name: 'console-theme',
     directories: {
-        dist: './wordpress/wp-content/themes/console',
+        dist: '../wordpress/wp-content/themes/console',
         src: './src',
-        wordpress: './wordpress',
+        wordpress: '../wordpress',
         module: './node_modules'
     },
-    proxy: 'development.server:9001',
+    proxy: 'development.server/wordpress/',
     watch: false
 }
