@@ -14,9 +14,10 @@ class Main extends React.Component {
 
     componentDidMount() {
         var scope = this;
-        scope.wp.pages()
+        scope.wp
+            .pages()
             .then(function (data) {
-              scope.setState({data});
+                scope.setState({data});
             })
             .catch(function (err) {
                 alert(err);
