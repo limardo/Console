@@ -15,7 +15,7 @@ if (!function_exists('console_setup')):
             'caption',
         ));
 
-        remove_filter( 'the_content', 'wpautop' );
+        remove_filter('the_content', 'wpautop');
     }
 endif;
 add_action('after_setup_theme', 'console_setup');
@@ -29,3 +29,13 @@ if (!function_exists('console_scripts')):
     }
 endif;
 add_action('wp_enqueue_scripts', 'console_scripts', 100);
+
+if (!function_exists('console_the_header')):
+    function console_the_header()
+    {
+        $text = get_theme_mod('console_header');
+        echo $text;
+    }
+endif;
+
+require get_template_directory() . '/inc/customizer.php';

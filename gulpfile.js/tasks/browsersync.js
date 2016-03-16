@@ -15,8 +15,8 @@ gulp.task('browsersync', function () {
         proxy: config.proxy,
         reloadOnRestart: true,
         notify: true,
-        open:false,
-        //browser: 'firefox',
+        open: true,
+        browser: 'firefox',
         files: [
             config.directories.wordpress + '/**/*'
         ],
