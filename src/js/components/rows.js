@@ -1,17 +1,16 @@
 import React from 'react';
 import Row from './row';
 import Output from './output';
-import WP from 'wordpress-rest-api'
+import WP from 'wordpress-rest-api';
+import $ from 'jquery';
+import _ from 'lodash';
 
 class Rows extends React.Component {
 
     constructor(props) {
         super(props);
-        this.wp = new WP({endpoint: WP_API_Settings.root});
         this.state = {
-            commands: [0],
-            loading: false,
-            output: ''
+            commands: [0]
         };
     }
 
@@ -22,43 +21,42 @@ class Rows extends React.Component {
     componentWillUnmount() {
     }
 
-    handleAddCommand(command) {
-        var output = this.state.output;
-        output = command;
-        this.setState({output: '', loading: true});
-
-        this.handleExecCommand();
+    handleLoadCommand(command) {
+        $(document).trigger('command', command);
     }
 
     handleExecCommand() {
-        var scope = this;
-        this.wp
-            .pages()
-            .then(function (data) {
-                var output = _.join(_.map(data, _.property('title.rendered')), ' ');
-                scope.setState({output: output, loading: false});
-                scope.handleOutputCommand();
-            })
-            .catch(function (err) {
-                alert(err);
-            });
+        $(document).trigger('exec');
     }
 
+
     handleOutputCommand() {
+        $(document).trigger('output');
+
         var commands = this.state.commands;
         commands.push(0);
-        this.setState({commands: commands, output: ''});
+        this.setState({commands});
     }
+
+    /*
+     handleOutputCommand() {
+     var commands = this.state.commands;
+     var output = _.clone(this.state.output);
+     commands.push(0);
+     this.setState({commands: commands, output: ''});
+     console.info('ok', output);
+     return 'ok';
+     }
+     */
 
     render() {
         var Commands = this.state.commands.map(function (command, index) {
             return (
                 <div key={index} className="row">
-                    <Row command={this.handleAddCommand.bind(this)}/>
+                    <Row command={this.handleLoadCommand.bind(this)}/>
                     <Output
-                        loading={this.state.loading}
-                        output={this.state.output}
-                        exec={this.handleOutputCommand.bind(this)}/>
+                        exec={this.handleExecCommand.bind(this)}
+                        output={this.handleOutputCommand.bind(this)}/>
                 </div>
             );
         }.bind(this));
@@ -67,4 +65,4 @@ class Rows extends React.Component {
     }
 }
 
-export default Rows
+export default Rows;
