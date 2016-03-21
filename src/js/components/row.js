@@ -1,6 +1,6 @@
-import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Keypress from 'react-keypress';
 
 class Row extends React.Component {
 
@@ -12,12 +12,11 @@ class Row extends React.Component {
     }
 
     componentDidMount() {
-        $(document).bind('keypress', this.handleKeydown);
+        this.refs.inputCommand.focus();
     }
 
     componentWillUnmount() {
-        $(ReactDOM.findDOMNode(this)).find('.cursor').remove();
-        $(document).unbind('keypress', this.handleKeydown);
+        this.refs.outputCommand.removeChild(this.refs.cursor);
     }
 
     exec(command) {
@@ -46,11 +45,12 @@ class Row extends React.Component {
     render() {
         return (
             <div className="input">
+                <input className="textbox" ref="inputCommand" onKeyUp={this.handleKeydown.bind(this)}/>
                 <i className="fa fa-cloud"></i>
                 <i className="fa fa-tilde"></i>
-                <span className="command">
+                <span className="command" ref="outputCommand">
                     {this.state.command}
-                    <span className="cursor">&nbsp;</span>
+                    <span className="cursor" ref="cursor">&nbsp;</span>
                 </span>
             </div>
         );

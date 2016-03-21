@@ -22,7 +22,7 @@ class Rows extends React.Component {
     }
 
     handleLoadCommand(command) {
-        $(document).trigger('command', command);
+        $(document).trigger('command', [command]);
     }
 
     handleExecCommand() {
@@ -37,17 +37,6 @@ class Rows extends React.Component {
         commands.push(0);
         this.setState({commands});
     }
-
-    /*
-     handleOutputCommand() {
-     var commands = this.state.commands;
-     var output = _.clone(this.state.output);
-     commands.push(0);
-     this.setState({commands: commands, output: ''});
-     console.info('ok', output);
-     return 'ok';
-     }
-     */
 
     render() {
         var Commands = this.state.commands.map(function (command, index) {

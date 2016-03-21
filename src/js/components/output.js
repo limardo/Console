@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import EventEmitter from 'events';
+import { browserHistory } from 'react-router'
 import WP from 'wordpress-rest-api';
 import $ from 'jquery';
 import _ from 'lodash';
@@ -28,14 +30,26 @@ class Output extends React.Component {
         $(document).unbind('output', this.handleOutputCommand);
     }
 
-    handleLoadCommand() {
-        var output = (<span className="cursor"></span>);
+    handleLoadCommand(event, command) {
+        var output = '<span className="cursor"></span>';
         this.setState({output});
 
-        this.wp
-            .pages()
-            .then(this.handleComplete.bind(this))
-            .catch(this.handleError.bind(this));
+        switch (command) {
+            case 'list':
+                this.wp
+                    .pages()
+                    .then(this.handleList.bind(this))
+                    .catch(this.handleError.bind(this));
+                break;
+            default:
+                browserHistory.push('/' + command);
+                this.wp
+                    .pages()
+                    .slug(command)
+                    .then(this.handleComplete.bind(this))
+                    .catch(this.handleError.bind(this));
+                break;
+        }
     }
 
     handleExecCommand() {
@@ -46,8 +60,14 @@ class Output extends React.Component {
         this.componentWillUnmount();
     }
 
+    handleList(data) {
+        var output = _.join(_.map(data, _.property('title.rendered')), '<br>');
+        this.setState({output});
+        this.props.exec();
+    }
+
     handleComplete(data) {
-        var output = _.join(_.map(data, _.property('title.rendered')), ' ');
+        var output = _.head(_.map(data, _.property('content.rendered')));
         this.setState({output});
         this.props.exec();
     }
@@ -59,7 +79,7 @@ class Output extends React.Component {
     render() {
         return (
             <div className="output">
-                <span className="command">{this.state.output}</span>
+                <span className="command" dangerouslySetInnerHTML={{__html:this.state.output}}/>
             </div>
         );
     }
