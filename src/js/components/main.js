@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import Rows from './rows';
 
 class Main extends React.Component {

@@ -37,6 +37,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "flux": "^2.1.1",
     "font-awesome": "^4.5.0",
     "jquery": "^2.2.1",
     "lodash": "^4.6.1",

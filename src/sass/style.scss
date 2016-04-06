@@ -12,45 +12,90 @@ Version: #{map-get($metadata, theme-version)}
 License: #{map-get($metadata, theme-license)}
  */
 
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 body {
-  font-family: monospace;
-  color: $foreground;
-  background-color: $background;
-  padding: 4px 8px;
+    font-family: monospace;
+    color: $foreground;
+    background-color: $background;
+    padding: 4px 8px;
 }
 
 header {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .fa-tilde {
-  font-size: 22px;
-  margin: 0 10px;
-  vertical-align: bottom;
-  &:before {
-    content: "~";
-  }
+    font-size: 22px;
+    margin: 0 10px;
+    vertical-align: bottom;
+
+    &:before {
+        content: "~";
+    }
 }
 
 .input {
-  overflow: hidden;
-  .textbox {
-    position: absolute;
-    border: none;
-    margin-left: -500px;
-  }
+    overflow: hidden;
+
+    .textbox {
+        position: absolute;
+        border: none;
+        margin-left: -500px;
+        margin-top: -20px;
+    }
 }
 
-.output{
-  padding: 5px 0;
+.output {
+    padding: 5px 0;
+
+    &-row {
+        display: block;
+        margin: 3px 0;
+    }
+
+    dl {
+        dt:before, dt:after,
+        dd:before, dd:after {
+            display: table;
+            content: " ";
+        }
+
+        dt:after,
+        dd:after {
+            clear: both;
+        }
+
+        dt {
+            float: left;
+            padding: 3px 0;
+        }
+
+        dd {
+            margin-left: 100px;
+            padding: 3px 0;
+        }
+
+        &.icon {
+            dd {
+                margin-left: 50px;
+            }
+        }
+    }
 }
 
 .command {
-  .cursor {
-    background-color: $foreground;
-    width: 8px;
-    height: 20px;
-    display: inline-block;
-    vertical-align: bottom;
-  }
+    .cursor {
+        background-color: $foreground;
+        width: 8px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+}
+
+.footer {
+    padding: 20px 0;
 }

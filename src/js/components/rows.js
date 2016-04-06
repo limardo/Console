@@ -1,56 +1,48 @@
 import React from 'react';
+import CommandStore from '../stores/commands';
+import Action from '../actions/console';
 import Row from './row';
 import Output from './output';
-import WP from 'wordpress-rest-api';
-import $ from 'jquery';
-import _ from 'lodash';
+
+const getCommands = () => {
+    return {commands: CommandStore.getCommands()};
+}
 
 class Rows extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            commands: [0]
-        };
+    constructor() {
+        super();
+        this.state = getCommands();
+        this._onChange = this._onChange.bind(this);
     }
 
     componentDidMount() {
-
+        CommandStore.addChangeListener(this._onChange);
     }
 
     componentWillUnmount() {
+        CommandStore.removeChangeListener(this._onChange);
     }
 
-    handleLoadCommand(command) {
-        $(document).trigger('command', [command]);
-    }
-
-    handleExecCommand() {
-        $(document).trigger('exec');
-    }
-
-
-    handleOutputCommand() {
-        $(document).trigger('output');
-
-        var commands = this.state.commands;
-        commands.push(0);
-        this.setState({commands});
+    _onChange(actionType) {
+        this.setState(getCommands);
     }
 
     render() {
-        var Commands = this.state.commands.map(function (command, index) {
+        var rows = this.state.commands.map(row => {
             return (
-                <div key={index} className="row">
-                    <Row command={this.handleLoadCommand.bind(this)}/>
-                    <Output
-                        exec={this.handleExecCommand.bind(this)}
-                        output={this.handleOutputCommand.bind(this)}/>
+                <div key={row.id} className="row">
+                    <Row command={row} handle={Action.addCommand.bind(null, row)}/>
+                    <Output command={row}/>
                 </div>
             );
-        }.bind(this));
+        });
 
-        return <div className="rows">{Commands}</div>;
+        return (
+            <div className="rows">
+                {rows}
+            </div>
+        );
     }
 }
 
