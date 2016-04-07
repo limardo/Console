@@ -1,5 +1,6 @@
 import React from 'react';
 import CommandStore from '../stores/commands';
+import HistoryStore from '../stores/history';
 
 class Row extends React.Component {
 
@@ -20,13 +21,19 @@ class Row extends React.Component {
     _onKeyDown(e) {
         if (e.keyCode === 13) {
             this._onEnter();
+        }else if(e.keyCode === 38){
+            this.props.decrement(this.state.command);
+        }else if(e.keyCode === 40){
+            this.props.increment(this.state.command);
+        }else if(e.keyCode === 9){
+            e.preventDefault();
         }
     }
 
     _onEnter() {
         // browserHistory.push('/' + command);
         this.refs.outputCommand.removeChild(this.refs.cursor);
-        this.props.handle(this.state.command);
+        this.props.enter(this.state.command);
     }
 
     render() {

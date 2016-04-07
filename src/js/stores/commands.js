@@ -83,7 +83,7 @@ const CommandStore = Object.assign(EventEmitter.prototype, {
         return _commands;
     },
 
-    dispatcherIndex: register(function (action) {
+    dispatcherIndex: register(action => {
         switch (action.actionType) {
             case Config.ADD_COMMAND:
                 _addCommand(action.command);

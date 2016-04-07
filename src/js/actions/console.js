@@ -21,4 +21,16 @@ export default {
             output: output
         });
     },
+    incrementHistory(command){
+        dispatch({
+            actionType: Config.HISTORY_INCREMENT,
+            command: command
+        });
+    },
+    decrementHistory(command){
+        dispatch({
+            actionType: Config.HISTORY_DECREMENT,
+            command: command
+        });
+    },
 }

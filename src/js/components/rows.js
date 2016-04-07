@@ -32,7 +32,12 @@ class Rows extends React.Component {
         var rows = this.state.commands.map(row => {
             return (
                 <div key={row.id} className="row">
-                    <Row command={row} handle={Action.addCommand.bind(null, row)}/>
+                    <Row 
+                        command={row} 
+                        enter={Action.addCommand}
+                        increment={Action.incrementHistory}
+                        decrement={Action.decrementHistory}
+                    />
                     <Output command={row}/>
                 </div>
             );
