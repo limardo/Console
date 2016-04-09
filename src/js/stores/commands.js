@@ -41,6 +41,7 @@ const _addCommand = (command) => {
 
     switch (_.trim(cmd.command)) {
         case 'list':
+        case 'ls':
             return Api.list(cmd);
             break;
         case 'help':

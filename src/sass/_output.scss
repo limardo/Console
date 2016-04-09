@@ -1,0 +1,37 @@
+.output {
+    padding: 5px 0;
+
+    &-row {
+        display: block;
+        margin: 3px 0;
+    }
+
+    dl {
+        dt:before, dt:after,
+        dd:before, dd:after {
+            display: table;
+            content: " ";
+        }
+
+        dt:after,
+        dd:after {
+            clear: both;
+        }
+
+        dt {
+            float: left;
+            padding: 3px 0;
+        }
+
+        dd {
+            margin-left: 100px;
+            padding: 3px 0;
+        }
+
+        &.icon {
+            dd {
+                margin-left: 50px;
+            }
+        }
+    }
+}

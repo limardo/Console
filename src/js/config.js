@@ -8,8 +8,7 @@ export default {
     INPUT_DELETE: 'INPUT_DELETE',
     COMMAND_LIST:[
         {label: 'list', description: 'display all pages'},
-        {label: 'listen', description: 'display all listen'},
-        {label: 'listin', description: 'display all listin'},
+        {label: 'ls', description: 'display all pages'},
         {label: 'help', description: 'display all usage info'}
     ]
 };

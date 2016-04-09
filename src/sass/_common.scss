@@ -1,0 +1,14 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+    color: $foreground;
+    background-color: $background;
+    padding: 4px 8px;
+}
+
+header {
+    margin-bottom: 20px;
+}

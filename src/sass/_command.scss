@@ -1,0 +1,13 @@
+.command {
+    .cursor {
+        background-color: $foreground;
+        width: 8px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: bottom;
+
+        &.hidden {
+            display: none;
+        }
+    }
+}
