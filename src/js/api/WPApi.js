@@ -10,7 +10,7 @@ const WPApi = {
         const template = (data) => {
             let row = data.map(item => {
                 return _.join([
-                    `<dt>${item.title.rendered}</dt>`,
+                    `<dt>${item.slug}</dt>`,
                     `<dd>${item.help || '&nbsp'}</dd>`
                 ],'');
             });

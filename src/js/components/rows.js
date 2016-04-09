@@ -44,7 +44,7 @@ class Rows extends React.Component {
                         increment={Action.incrementHistory}
                         decrement={Action.decrementHistory}
                         autocomplete={Action.autocomplete}
-                        delete={Action.delete}
+                        delete={Action.deleteCache}
                     />
                     <Output command={row}/>
                 </div>

@@ -9,5 +9,17 @@
         &.hidden {
             display: none;
         }
+
+        &.loader {
+            $percents: (percent: 0, value: "\\"), (percent: 33, value: "|"), (percent: 66, value: "/"), (percent: 100, value: "-");
+
+            background: transparent;
+
+            @each $item in $percents {
+                &-#{map-get($item, percent)}:after {
+                    content: map-get($item, value);
+                }
+            }
+        }
     }
 }

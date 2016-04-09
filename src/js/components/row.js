@@ -1,5 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Cursor from './cursor';
+import Config from '../config';
 import CommandStore from '../stores/commands';
 import HistoryStore from '../stores/history';
 import _ from 'lodash';
@@ -8,7 +10,11 @@ class Row extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {command: props.command, position: 0};
+        this.state = {
+            command: props.command,
+            position: 0
+        };
+        this._tabCache = '';
         this._onChange = this._onChange.bind(this);
         this._onKeyDown = this._onKeyDown.bind(this);
         this._onEnter = this._onEnter.bind(this);
@@ -16,6 +22,16 @@ class Row extends React.Component {
         this._moveRight = this._moveRight.bind(this);
         this._move = this._move.bind(this);
         this._reinitPosition = this._reinitPosition.bind(this);
+        this._reinitTabCache = this._reinitTabCache.bind(this);
+        this._listen = this._listen.bind(this);
+    }
+
+    componentDidMount() {
+        CommandStore.addChangeListener(this._listen);
+    }
+
+    componentWillUnmount() {
+        CommandStore.removeChangeListener(this._listen);
     }
 
     _onChange(e) {
@@ -25,29 +41,42 @@ class Row extends React.Component {
     }
 
     _onKeyDown(e) {
-        if (e.keyCode === 13) {
+        var keyCode = e.keyCode || e.which;
+
+        if (keyCode === 13) {
+            this._reinitTabCache();
             this._onEnter();
-        }else if(e.keyCode === 37){
+        }else if(keyCode === 37){
+            this._reinitTabCache();
             this._moveLeft();
-        }else if(e.keyCode === 39){
+        }else if(keyCode === 39){
+            this._reinitTabCache();
             this._moveRight();
-        }else if(e.keyCode === 38){
+        }else if(keyCode === 38){
+            this._reinitTabCache();
             this.props.decrement(this.state.command);
             this._reinitPosition();
-        }else if(e.keyCode === 40){
+        }else if(keyCode === 40){
+            this._reinitTabCache();
             this.props.increment(this.state.command);
             this._reinitPosition();
-        }else if(e.keyCode === 9){
+        }else if(keyCode === 9){
             e.preventDefault();
-            this.props.autocomplete(this.state.command, e.currentTarget.value);
-            this._reinitPosition();
-        }else if(e.keyCode === 8 || e.keyCode === 46){
-            this.props.delete();
 
-            if(e.keyCode === 8){
+            if(_.isEmpty(this._tabCache)){
+                this._tabCache = e.currentTarget.value;
+            }
+
+            this.props.autocomplete(this.state.command, this._tabCache);
+            this._reinitPosition();
+        }else if(keyCode === 8 || e.keyCode === 46){
+            this._reinitTabCache();
+
+            if(keyCode === 8){
                 this._moveLeft();
             }
         }else{
+            this._reinitTabCache();
             this.setState({position: e.currentTarget.selectionStart + 1});
         }
     }
@@ -91,7 +120,22 @@ class Row extends React.Component {
     }
 
     _reinitPosition() {
-        this.setState({position: this.state.command.command.length});
+        setTimeout( () => {
+            this.refs.inputCommand.selectionStart = this.state.command.command.length;
+            this.setState({position: this.state.command.command.length});
+        }, 50);
+    }
+
+    _reinitTabCache() {
+        this.props.delete();
+        this._tabCache = '';
+    }
+
+    _listen(action){
+        if(action === Config.ADD_COMMAND){
+            this.componentWillUnmount();
+            this.refs.inputCommand.disabled = true;
+        }
     }
 
     render() {
@@ -108,6 +152,7 @@ class Row extends React.Component {
         return (
             <div className="input">
                 <input
+                    ref="inputCommand"
                     className="textbox"
                     onChange={this._onChange}
                     onKeyDown={this._onKeyDown}

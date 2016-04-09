@@ -40,9 +40,9 @@ export default {
             query: query
         });
     },
-    delete(){
+    deleteCache(){
         dispatch({
-            actionType: Config.INPUT_DELETE
+            actionType: Config.INPUT_DELETE_CACHE
         });
     },
 }

@@ -7,8 +7,17 @@ import _ from 'lodash';
 const CHANGE_EVENT = 'change';
 
 let _list = _.map(Config.COMMAND_LIST, 'label');
+
 let _cache = [];
 let _current = 0;
+
+Api.instance.pages().then(items => {
+    var pages = items.map(item => {
+        return _.result(item, 'slug');
+    });
+
+    _list = _.concat(_list, pages);
+});
 
 const AutoCompleteStore = Object.assign(EventEmitter.prototype,{
     emitChange(actionType) {
@@ -25,7 +34,7 @@ const AutoCompleteStore = Object.assign(EventEmitter.prototype,{
 
     dispatcherIndex: register(action => {
         switch (action.actionType) {
-            case Config.INPUT_DELETE:
+            case Config.INPUT_DELETE_CACHE:
                 _cache = [];
                 _current = 0;
                 break;

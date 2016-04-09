@@ -1,5 +1,6 @@
 import React from 'react';
 import Config from '../config';
+import Preload from './preload';
 import CommandStore from '../stores/commands';
 
 
@@ -26,14 +27,31 @@ class Output extends React.Component {
         if (actionType === Config.OUTPUT_COMMAND) {
             // browserHistory.push('/' + command);
             window.scrollTo(0, window.scrollMaxY);
+            this.componentWillUnmount();
         }
     }
 
     render() {
-        var output = this.props.command.loading ? '<span class="cursor"></span>' : this.props.command.output;
+        const getOutput = () => {
+            if(!this.props.command.loading){
+                return (
+                    <span
+                        className="command"
+                        dangerouslySetInnerHTML={{__html:this.props.command.output}}
+                    />
+                );
+            }
+
+            return (
+                <span className="command">
+                    <Preload/>
+                </span>
+            );
+        }
+
         return (
             <div className="output">
-                <span className="command" dangerouslySetInnerHTML={{__html:output}}/>
+                {getOutput()}
             </div>
         );
     }
