@@ -4,7 +4,7 @@ if (!function_exists('console_setup')):
     function console_setup()
     {
         add_theme_support('automatic-feed-links');
-        add_theme_support('title-tag');
+        //add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
         // Controllare
         add_theme_support('html5', [
@@ -19,6 +19,14 @@ if (!function_exists('console_setup')):
     }
 endif;
 add_action('after_setup_theme', 'console_setup');
+
+if (!function_exists('console_title_tag')):
+    function console_title_tag($param)
+    {
+        echo '<title>' . get_bloginfo('name') . '-' . get_bloginfo('description') . '</title>';
+    }
+endif;
+add_filter('wp_head', 'console_title_tag');
 
 if (!function_exists('console_scripts')):
     function console_scripts()

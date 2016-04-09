@@ -6,6 +6,7 @@ import Main from './components/main';
 ReactDOM.render((
     <Router history={browserHistory}>
         <Route path='/' component={Main}>
+            <Route path='/:command'/>
         </Route>
     </Router>
 ), document.getElementById('app'));

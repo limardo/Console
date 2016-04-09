@@ -3,7 +3,6 @@ import Config from '../config';
 import Preload from './preload';
 import CommandStore from '../stores/commands';
 
-
 class Output extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +24,6 @@ class Output extends React.Component {
         });
 
         if (actionType === Config.OUTPUT_COMMAND) {
-            // browserHistory.push('/' + command);
             window.scrollTo(0, window.scrollMaxY);
             this.componentWillUnmount();
         }

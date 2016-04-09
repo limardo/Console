@@ -1,6 +1,7 @@
 import Config from '../config';
 import {dispatch,register} from '../dispatcher/console';
 import {EventEmitter} from 'events';
+import {browserHistory} from 'react-router';
 import Api from '../api/WPApi';
 import _ from 'lodash';
 
@@ -65,6 +66,8 @@ const _outputCommand = (command, output) => {
     var cmd = _findCommand(command);
     cmd.output = output;
     _incrementCommand();
+    browserHistory.push('/' + command.command);
+    console.info(command.command);
 };
 
 const CommandStore = Object.assign(EventEmitter.prototype, {
