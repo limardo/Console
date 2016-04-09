@@ -1,7 +1,7 @@
 import React from 'react';
 import Config from '../config';
 import CommandStore from '../stores/commands';
-import HistoryStore from '../stores/history';
+
 
 class Output extends React.Component {
     constructor(props) {
@@ -12,12 +12,10 @@ class Output extends React.Component {
 
     componentDidMount() {
         CommandStore.addChangeListener(this._onChange);
-        HistoryStore.addChangeListener(this._onChange);
     }
 
     componentWillUnmount() {
         CommandStore.removeChangeListener(this._onChange);
-        HistoryStore.removeChangeListener(this._onChange);
     }
 
     _onChange(actionType) {

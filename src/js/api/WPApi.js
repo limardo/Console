@@ -1,4 +1,5 @@
 import React from 'react';
+import Config from '../config';
 import WP from 'wordpress-rest-api';
 import Action from '../actions/console';
 import _ from 'lodash';
@@ -44,10 +45,8 @@ const WPApi = {
         .catch(this.error.bind(this));
     },
     help(command){
-        var data = [
-            {label: 'list', description: 'display all pages'},
-            {label: 'help', description: 'display all usage info'}
-        ];
+
+        var data = Config.COMMAND_LIST;
 
         const template = (data) => {
 

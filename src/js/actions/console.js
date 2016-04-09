@@ -33,4 +33,16 @@ export default {
             command: command
         });
     },
+    autocomplete(command, query){
+        dispatch({
+            actionType: Config.AUTOCOMPLETE_COMMAND,
+            command: command,
+            query: query
+        });
+    },
+    delete(){
+        dispatch({
+            actionType: Config.INPUT_DELETE
+        });
+    },
 }

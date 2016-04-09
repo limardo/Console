@@ -27,3 +27,6 @@ _normalize.scss
 
 # Sass cache
 .sass-cache/
+
+# Vim
+*.swp

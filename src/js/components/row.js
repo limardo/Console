@@ -21,12 +21,19 @@ class Row extends React.Component {
     _onKeyDown(e) {
         if (e.keyCode === 13) {
             this._onEnter();
+        }else if(e.keyCode === 37){
+            //Move Cursor Left
+        }else if(e.keyCode === 39){
+            //Move Cursor Right
         }else if(e.keyCode === 38){
             this.props.decrement(this.state.command);
         }else if(e.keyCode === 40){
             this.props.increment(this.state.command);
         }else if(e.keyCode === 9){
             e.preventDefault();
+            this.props.autocomplete(this.state.command, e.currentTarget.value);
+        }else if(e.keyCode === 8 || e.keyCode === 46){
+            this.props.delete();
         }
     }
 
